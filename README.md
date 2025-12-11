@@ -148,44 +148,9 @@ Workflow simulation logic
 
 Clean React architecture
 
-This meets 95–100% of the assignment expectations.
-
-✅ 2. ZIP Submission Checklist (Follow Exactly)
-
-Before creating your ZIP for submission:
-
-✔ Include only necessary project files:
-hr-workflow-builder/
- ├── src/
- ├── public/
- ├── index.html
- ├── vite.config.js
- ├── package.json
- ├── package-lock.json
- ├── README.md
-
-❌ DO NOT include:
-
-node_modules (never zip this)
-
-.git folder
-
-.DS_Store
-
-dist folder
-
-✔ How to create ZIP on Mac:
-
-Right-click on the project folder → Compress “hr-workflow-builder”
-
-This will generate:
-
-hr-workflow-builder.zip
 
 
-Perfect for submission.
-
-✅ 3. Demo Workflow JSON (use this as example for your report)
+✅ 3. Demo Workflow JSON 
 {
   "nodes": [
     {
@@ -248,8 +213,4 @@ Perfect for submission.
 }
 
 
-This JSON can be:
 
-Imported into the workflow builder
-
-Included in your report as an example
