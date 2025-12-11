@@ -1,6 +1,3 @@
-// src/nodes/nodeHelpers.js
-// Helper to create nodes with consistent default data shapes.
-
 let idCounter = 0;
 const getId = () => `node_${idCounter++}`;
 
