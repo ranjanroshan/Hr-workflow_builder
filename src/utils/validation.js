@@ -1,15 +1,3 @@
-// src/utils/validation.js
-// Graph validation utilities for the workflow designer.
-//
-// Exports:
-//  - validateGraph(nodes, edges)
-// Returns:
-//  {
-//    ok: boolean,
-//    errors: [{ type, message, nodeId? }],
-//    details: { unreachable: [...ids], cycles: [[id,id,...]], startId?: string }
-//  }
-
 function buildAdjacency(nodes = [], edges = []) {
   const adj = new Map();
   const incoming = new Map();
@@ -31,10 +19,7 @@ function buildAdjacency(nodes = [], edges = []) {
   return { adj, incoming };
 }
 
-/**
- * Find nodes reachable from the given start node id using DFS.
- * Returns a Set of visited node ids.
- */
+
 function findReachableFrom(startId, adj) {
   const visited = new Set();
   const stack = [startId];
@@ -52,12 +37,7 @@ function findReachableFrom(startId, adj) {
   return visited;
 }
 
-/**
- * Detect cycles in the directed graph.
- * Returns an array of cycles, each cycle is an array of node ids (one example cycle).
- *
- * Uses DFS with recursion stack detection.
- */
+
 function detectCycles(nodes = [], adj) {
   const WHITE = 0; // unvisited
   const GRAY = 1; // visiting (in recursion stack)
