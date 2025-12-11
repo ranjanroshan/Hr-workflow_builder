@@ -1,17 +1,6 @@
-// src/forms/NodeConfigPanel.jsx
 import React, { useMemo } from "react";
 
-/**
- * NodeConfigPanel
- * Props:
- * - selectedNode
- * - updateSelectedNodeData(patch)
- * - automations
- * - runSimulation, simulationLog, isSimulating
- * - exportWorkflow, importWorkflow
- * - validationResult
- * - onDeleteSelected
- */
+
 export default function NodeConfigPanel({
   selectedNode,
   updateSelectedNodeData,
@@ -24,14 +13,14 @@ export default function NodeConfigPanel({
   validationResult,
   onDeleteSelected,
 }) {
-  // helper: find automation definition for the selected node's action id
+ 
   const selectedAutomationDef = useMemo(() => {
     if (!selectedNode || !selectedNode.data) return null;
     const actionId = selectedNode.data.automationAction;
     return automations.find((a) => a.id === actionId) || null;
   }, [selectedNode, automations]);
 
-  // ---------- Helpers for list of key/value pairs (metadata / customFields) ----------
+  
   const renderKeyValueList = (list = [], onChangeList, listLabel = "Fields") => {
     return (
       <div style={{ marginBottom: 12 }}>
@@ -95,7 +84,7 @@ export default function NodeConfigPanel({
     );
   };
 
-  // render dynamic action params (if any)
+  
   const renderActionParams = () => {
     if (!selectedAutomationDef) return null;
     const params = Array.isArray(selectedAutomationDef.params) ? selectedAutomationDef.params : [];
@@ -169,7 +158,7 @@ export default function NodeConfigPanel({
             </>
           )}
 
-          {/* TASK NODE - description, assignee, dueDate, customFields */}
+          
           {selectedNode.data.nodeType === "Task" && (
             <>
               <div style={{ marginBottom: 12 }}>
@@ -211,7 +200,7 @@ export default function NodeConfigPanel({
             </>
           )}
 
-          {/* APPROVAL NODE */}
+          
           {selectedNode.data.nodeType === "Approval" && (
             <>
               <div style={{ marginBottom: 12 }}>
@@ -234,7 +223,7 @@ export default function NodeConfigPanel({
             </>
           )}
 
-          {/* AUTOMATED NODE */}
+          
           {selectedNode.data.nodeType === "Automated" && (
             <>
               <div style={{ marginBottom: 12 }}>
@@ -267,7 +256,7 @@ export default function NodeConfigPanel({
             </>
           )}
 
-          {/* END NODE */}
+          
           {selectedNode.data.nodeType === "End" && (
             <>
               <div style={{ marginBottom: 12 }}>
