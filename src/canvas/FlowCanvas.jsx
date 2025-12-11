@@ -1,4 +1,3 @@
-// src/canvas/FlowCanvas.jsx
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactFlow, {
   ReactFlowProvider,
@@ -12,10 +11,7 @@ import { getAutomations, simulateWorkflow } from "../api/mockApi";
 import { createNode } from "../nodes/nodeHelpers";
 import { validateGraph } from "../utils/validation";
 
-/**
- * FlowCanvas: contains the React Flow area, drag/drop, nodes/edges state,
- * selection handling, and wires into NodeConfigPanel.
- */
+
 export default function FlowCanvasInner() {
   const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -24,13 +20,13 @@ export default function FlowCanvasInner() {
   const [selectedNode, setSelectedNode] = useState(null);
   const [rfInstance, setRfInstance] = useState(null);
 
-  // automations & simulation UI state
+  
   const [automations, setAutomations] = useState([]);
   const [simulationLog, setSimulationLog] = useState([]);
   const [isSimulating, setIsSimulating] = useState(false);
   const [validationResult, setValidationResult] = useState({ ok: true, errors: [] });
 
-  // fetch automations once
+  
   useEffect(() => {
     let mounted = true;
     getAutomations().then((data) => {
@@ -82,8 +78,7 @@ export default function FlowCanvasInner() {
     },
     [rfInstance, setNodes, automations]
   );
-
-  // selection handler
+ 
   const onSelectionChange = useCallback(({ nodes: selectedNodes }) => {
     if (selectedNodes && selectedNodes.length > 0) {
       setSelectedNode(selectedNodes[0]);
@@ -92,10 +87,10 @@ export default function FlowCanvasInner() {
     }
   }, []);
 
-  // deletion handlers
+  
   const onNodesDelete = useCallback(
     (deleted) => {
-      // update nodes state (use provided setNodes), clear selection if deleted
+      
       const deletedIds = new Set(deleted.map((n) => n.id));
       setNodes((nds) => nds.filter((n) => !deletedIds.has(n.id)));
       if (selectedNode && deletedIds.has(selectedNode.id)) setSelectedNode(null);
@@ -126,7 +121,7 @@ export default function FlowCanvasInner() {
     [setEdges]
   );
 
-  // update selected node's data (applies changes instantly)
+  
   const updateSelectedNodeData = useCallback(
     (patch) => {
       if (!selectedNode) return;
@@ -143,7 +138,7 @@ export default function FlowCanvasInner() {
     [selectedNode, setNodes]
   );
 
-  // Run simulation: validate first, then call mock simulateWorkflow
+  
   const runSimulation = useCallback(async () => {
     const validation = validateGraph(nodes, edges);
     setValidationResult(validation);
@@ -169,7 +164,7 @@ export default function FlowCanvasInner() {
     }
   }, [nodes, edges]);
 
-  // Export / Import helpers (simple)
+  
   const exportWorkflow = useCallback(() => {
     const payload = { nodes, edges };
     const json = JSON.stringify(payload, null, 2);
@@ -201,7 +196,7 @@ export default function FlowCanvasInner() {
     }
   }, [setNodes, setEdges]);
 
-  // map live labels (title) into node data for display
+  
   const nodesForRender = nodes.map((n) => ({ ...n, data: { ...n.data, label: n.data.title || n.data.nodeType } }));
 
   return (
@@ -324,9 +319,7 @@ const sidebarItemStyle = {
   userSelect: "none",
 };
 
-/**
- * Wrapper with ReactFlowProvider so FlowCanvasInner can be imported easily.
- */
+
 export function FlowCanvas() {
   return (
     <ReactFlowProvider>
