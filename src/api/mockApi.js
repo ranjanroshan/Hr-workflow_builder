@@ -1,6 +1,3 @@
-// src/api/mockApi.js
-// Mocks GET /automations and POST /simulate
-
 const AUTOMATIONS = [
   {
     id: "send_email",
@@ -18,19 +15,12 @@ const AUTOMATIONS = [
     params: ["url", "payload"],
   },
 ];
-
-// ----------------------
-// GET /automations
-// ----------------------
 export function getAutomations(delay = 300) {
   return new Promise((resolve) => {
     setTimeout(() => resolve(AUTOMATIONS), delay);
   });
 }
 
-// ----------------------
-// POST /simulate
-// ----------------------
 export function simulateWorkflow(workflow, delay = 600) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -39,7 +29,7 @@ export function simulateWorkflow(workflow, delay = 600) {
 
       const findNode = (id) => nodes.find((n) => n.id === id);
 
-      // Find Start
+
       const start = nodes.find((n) => n.data?.nodeType === "Start") || nodes[0];
 
       const log = [];
